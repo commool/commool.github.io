@@ -1,10 +1,11 @@
 const placeContainer = document.querySelector('[data-place-container]');
-const dateContainer = document.querySelector('[data-date-container]');
 const timeContainer = document.querySelector('[data-time-container]');
+const urlContainer = document.querySelector('[data-url-container]')
+const bookmarkletContainer = document.querySelector('[data-bookmarklet-container]')
 const dateInput = document.querySelector('[data-date]');
 const placeRadios = [...document.querySelectorAll('[data-place]')];
 const generateUrl = document.querySelector('[data-generate-url]');
-const urlTextarea = document.querySelector('[data-url');
+const generateBookmarklet = document.querySelector('[data-bookmarklet]');
 let placeValue = 912;
 
 function renderTimeCheckbox(){
@@ -68,30 +69,25 @@ function generateClickHandler(){
   const time = [...timeContainer.querySelectorAll(':checked')].map(input => input.value).join('|');
   if (time.length === 0) return;
   const url = `https://www.gunpouc.or.kr/fmcs/157?center=GUNPO02&facilities_type=T&action=write&base_date=${date}&place=${place}&part=02&comcd=GUNPO02&part_cd=02&place_cd=${place}&time_no=${time}&rent_type=1001&rent_date=${date}`;
-  urlTextarea.textContent = url;
-}
-
-function copyToClipboard(){
-  if(!urlTextarea.value) return;
-  urlTextarea.select();
-  urlTextarea.setSelectionRange(0, 9999);
-  document.execCommand('copy');
-  alert("Copied to clipboard");
+  urlContainer.innerHTML = `<a data-link href="${url}">1. quick link</a>`;
 }
 
 function makeBookmarklet(team, users, purpose){
-  document.querySelector('#team_nm').value = team;
-  document.querySelector('#users').value = users;
-  document.querySelector('#purpose').value = purpose;
-  document.querySelector('#agree_use1').checked = true;
-  document.querySelector('.action_write').click();
+  return `<a data-link href="javascript:(function()%7Bdocument.querySelector('%23team_nm').value%3D%22${encodeURIComponent(team)}%22%3Bdocument.querySelector('%23users').value%3D${encodeURIComponent(users)}%3Bdocument.querySelector('%23purpose').value%3D%22${encodeURIComponent(purpose)}%22%3Bdocument.querySelector('%23agree_use1').checked%3Dtrue%3Bdocument.querySelector('.action_write').click()%7D)()">2. Bookmarklet</a>`;
+}
+
+function makeBookmarkletHandler(){
+  const team = document.querySelector('[data-team]').value;
+  const users = document.querySelector('[data-users]').value;
+  const purpose = document.querySelector('[data-purpose]').value;
+  bookmarkletContainer.innerHTML = makeBookmarklet(team, users, purpose);
 }
 
 function addEvents(){
   placeRadios.forEach(radio => radio.addEventListener('change', placeClickHandler));
   timeContainer.addEventListener('click', timeClickHandler);
   generateUrl.addEventListener('click', generateClickHandler);
-  urlTextarea.addEventListener('click', copyToClipboard);
+  generateBookmarklet.addEventListener('click', makeBookmarkletHandler);
 }
 
 function init(){
