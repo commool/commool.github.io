@@ -1,0 +1,58 @@
+input[type=radio], input[type=checkbox] {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+}
+
+[data-place-container] label, [data-time-container] label {
+  display: inline-block;
+  margin: 2px;
+  padding: 10px;
+  border-radius: 2px;
+  background: rgb(230, 230, 230);
+  font-size: 0.9em;
+  color: rgb(45, 45, 45);
+}
+
+:checked + label {
+  background: rgb(63, 106, 82);
+  color: #fff;
+}
+
+:disabled + label {
+  opacity: .1;
+}
+
+[data-generate-url] {
+  display: block;
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #00b563;
+  border-radius: 4px;
+  background: #00da78;
+  font-size: .9em;
+  color: #fff;
+}
+
+[data-url], [data-bookmarklet] {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100px;
+  padding: 5px;
+  font-size: 0.8em;
+  background: rgb(228, 228, 228);
+  word-break: break-all;
+}
+
+[data-field-container] input {
+  display: block;
+  box-sizing: border-box;
+  margin: 5px 0 20px;
+  width: 100%;
+  height: 30px;
+  padding: 5px;
+  font-size: .9em;
+}
