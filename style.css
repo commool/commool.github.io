@@ -9,6 +9,35 @@ strong {
   margin: 10px 0;
 }
 
+ul, ol, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+hr {
+  margin: 20px 0;
+  border-top: 1px dashed gray;
+}
+
+.guide {
+  padding: 5px;
+  border: 1px solid rgb(155, 155, 155);
+  background: rgb(227, 227, 227);
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #333;
+
+}
+.guide em {
+  padding: 2px;
+  border-radius: 3px;
+  background: rgb(255, 53, 53);
+  font-size: 0.7em;
+  font-weight: 700;
+  color: #fff;
+}
+
 input[type=radio], input[type=checkbox] {
   position: absolute;
   overflow: hidden;
